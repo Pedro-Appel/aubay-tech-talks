@@ -3,7 +3,6 @@
 # Base URL for the API endpoints
 HOST='app:8080'
 ENDPOINT='/api/v1/resilience'
-
 # Function to perform 30 simultaneous POST requests
 function call_post_simultaneous() {
     echo "Calling POST endpoint with 50 simultaneous requests..."
