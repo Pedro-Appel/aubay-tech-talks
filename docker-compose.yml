@@ -2,6 +2,7 @@ version: '3'
 
 networks:
   local:
+    driver: bridge
 
 services:
 
@@ -58,7 +59,9 @@ services:
       - local
   
   grafana:
-    image: grafana/grafana:11.2.0
+    build:
+      context: ./grafana/
+      dockerfile: Dockerfile
     depends_on:
       - prometheus
       - client
@@ -66,17 +69,5 @@ services:
     restart: unless-stopped
     ports:
       - 3000:3000
-    networks:
-      - local
-
-  grafana-setup:
-    build: 
-      context: ./grafana/
-      dockerfile: Dockerfile
-    image: grafana-setup
-    container_name: grafana-setup
-    restart: on-failure
-    depends_on:
-      - grafana
     networks:
       - local

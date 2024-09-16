@@ -1,7 +1,13 @@
 #!/bin/bash
 
+setsid /run.sh > /dev/null &
+
+sleep 20
+
+echo "Running setup script "
+
 # Create prometheus datasource
-curl -X POST http://admin:admin@host.docker.internal:3000/api/datasources \
+curl -X POST http://admin:admin@localhost:3000/api/datasources \
     -u "admin:admin" \
     -H "Accept: application/json" \
     -H "Content-Type: application/json" \
@@ -11,7 +17,7 @@ curl -X POST http://admin:admin@host.docker.internal:3000/api/datasources \
 json=$(<dash.json)
 payload="{\"dashboard\": $json, \"overwrite\": true}"
 
-curl -X POST http://admin:admin@host.docker.internal:3000/api/dashboards/import \
+curl -X POST http://admin:admin@localhost:3000/api/dashboards/import \
     -u "admin:admin" \
     -H "Accept: application/json" \
     -H "Content-Type: application/json" \
