@@ -58,7 +58,7 @@ services:
       - local
   
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:11.2.0
     depends_on:
       - prometheus
       - client
@@ -76,5 +76,7 @@ services:
     image: grafana-setup
     container_name: grafana-setup
     restart: on-failure
+    depends_on:
+      - grafana
     networks:
       - local
