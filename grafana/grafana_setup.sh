@@ -11,7 +11,7 @@ curl -X POST http://admin:admin@localhost:3000/api/datasources \
     -u "admin:admin" \
     -H "Accept: application/json" \
     -H "Content-Type: application/json" \
-    -d '{ "name": "prometheus", "uid":"prom-data", "type": "prometheus", "access": "proxy", "url": "http://host.docker.internal:9090", "basicAuth": true, "isDefault":true}' \
+    -d '{ "name": "prometheus", "uid":"prom-data", "type": "prometheus", "access": "proxy", "url": "http://prometheus:9090", "basicAuth": true, "isDefault":true}' \
 
 # Import dashboard
 json=$(<dash.json)
