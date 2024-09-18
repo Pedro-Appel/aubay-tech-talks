@@ -32,3 +32,9 @@ curl -X POST http://admin:admin@localhost:3000/api/dashboards/import \
     -H "Content-Type: application/json" \
     -d "$payload"
     
+# Put the dash as home
+curl -X PUT http://admin:admin@localhost:3000/api/org/preferences \
+    -u "admin:admin" \
+    -H "Accept: application/json" \
+    -H "Content-Type: application/json" \
+    -d '{"homeDashboardUID":"adv-dash"}'

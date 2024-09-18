@@ -770,5 +770,6 @@
     "timezone": "browser",
     "title": "Basic Observability - Resilience4j Circuit Breaker",
     "version": 1,
-    "weekStart": ""
+    "weekStart": "",
+    "uid": "basic-dash"
   }
