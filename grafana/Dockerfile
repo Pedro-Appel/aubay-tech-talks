@@ -2,8 +2,7 @@ FROM grafana/grafana:11.2.0-ubuntu
 
 USER root
 
-COPY ./grafana_setup.sh /scripts/
-COPY ./dash.json /scripts/
+COPY . /scripts/
 
 WORKDIR /scripts
 

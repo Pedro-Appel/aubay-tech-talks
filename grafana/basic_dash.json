@@ -768,7 +768,7 @@
     },
     "timepicker": {},
     "timezone": "browser",
-    "title": "Tech Talks Aubay - Resilience4j Circuit Breaker ",
+    "title": "Basic Observability - Resilience4j Circuit Breaker",
     "version": 1,
     "weekStart": ""
   }
