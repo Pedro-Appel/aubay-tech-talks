@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
-          path: java-resilience4j-lab/target/*.jar #TODO: alterar o path da aplicação
+          path: java-resilience4j-lab/target/*.jar
 
       - name: Download build artifacts
         uses: actions/download-artifact@v3
