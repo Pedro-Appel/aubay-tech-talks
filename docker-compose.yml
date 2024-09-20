@@ -2,6 +2,7 @@ version: '3'
 
 networks:
   local:
+    driver: bridge
 
 services:
 
@@ -56,4 +57,17 @@ services:
     restart: unless-stopped
     networks:
       - local
-
+  
+  grafana:
+    build:
+      context: ./grafana/
+      dockerfile: Dockerfile
+    depends_on:
+      - prometheus
+      - client
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    networks:
+      - local
