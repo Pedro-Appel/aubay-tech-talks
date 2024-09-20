@@ -1,8 +1,19 @@
+#
+# Build stage
+#
 FROM eclipse-temurin:21-jdk-jammy AS build
-RUN ./mvnw clean install
 ENV HOME=/usr/app
 RUN mkdir -p $HOME
 WORKDIR $HOME
-COPY target/*.jar $HOME/app.jar
+ADD . $HOME
+RUN ./mvnw -f $HOME/pom.xml clean package
+
+#
+# Package stage
+#
+FROM eclipse-temurin:21-jre-jammy
+ARG JAR_FILE=/usr/app/target/*.jar
+COPY --from=build $JAR_FILE /app/app.jar
 EXPOSE 8080
+
 ENTRYPOINT ["java","-Xms128M","-Xmx128M","-jar","/app/app.jar"]
