@@ -1,13 +1,16 @@
 # TechTalk Hands-On Lab: Implementing Resilience Patterns with Resilience4j
 
-Welcome to the TechTalk hands-on lab! In this session, we’ll be enhancing an existing Java application with resilience patterns using the Resilience4j library. Resilience4j is a lightweight fault tolerance library designed for Java 8 and functional programming. We will cover the implementation of various resilience patterns including Circuit Breaker, Rate Limiter, and Retry.
+Welcome to the TechTalk hands-on lab! In this session,
+we’ll be enhancing an existing Java application with resilience patterns using the Resilience4j library.
+Resilience4j is a lightweight fault tolerance library.
+We will cover the implementation of various resilience patterns including Circuit Breaker, Rate Limiter, Timelimiter,
+and Retry.
 
 ## Prerequisites
 
-- Java Development Kit (JDK) 11 or higher
+- Java Development Kit (JDK) 17 or higher
 - Maven (for dependency management)
-- An IDE (e.g., IntelliJ IDEA, Eclipse)
-- Basic understanding of Java and Maven
+- An IDE (e.g., IntelliJ IDEA, Eclipse, VSCode)
 - The Java application code (provided)
 
 ## Objectives
@@ -33,7 +36,7 @@ Welcome to the TechTalk hands-on lab! In this session, we’ll be enhancing an e
 
 3. **Add Dependencies**
 
-   If you’re using Maven, add the following dependencies to your `pom.xml`:
+   Add the following dependencies to your `pom.xml`:
 
    ```xml
      <dependency>
@@ -248,6 +251,11 @@ Welcome to the TechTalk hands-on lab! In this session, we’ll be enhancing an e
 2. **Run the Application**
 
    Run the application from your IDE or using the command line.
+
+   ```bash
+   mvn spring-boot:run
+   ```
+
 
 ## Conclusion
 
