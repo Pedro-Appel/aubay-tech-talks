@@ -5,8 +5,8 @@ FROM eclipse-temurin:21-jdk-jammy AS build
 ENV HOME=/usr/app
 RUN mkdir -p $HOME
 WORKDIR $HOME
-RUN ls -ltra
 COPY . $HOME
+RUN ls -ltra
 
 RUN apt-get update && apt-get install dos2unix
 RUN dos2unix ./mvnw
