@@ -29,10 +29,6 @@ jobs:
           name: build-artifacts
           path: java-resilience4j-lab/target/*.jar #TODO: alterar o path da aplicação
 
-  docker-build-and-push:
-    runs-on: ubuntu-latest
-    needs: java-build
-    steps:
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
