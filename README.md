@@ -19,7 +19,7 @@ In this section, you’ll work with an existing Java application that demonstrat
 **Key Objectives:**
 
 - Integrate Resilience4j into the Java application.
-- Implement Circuit Breaker, Rate Limiter, and Retry patterns.
+- Implement Circuit Breaker, Rate Limiter, Time limiter, and Retry patterns.
 - Test the resilience features and understand their impact on application stability.
 
 Once you complete the hands-on exercises in this section, you can move on to the next topic, where you'll automate the deployment and testing of this resilient application using GitHub workflows.
