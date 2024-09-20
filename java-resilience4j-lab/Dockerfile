@@ -1,5 +1,5 @@
 FROM eclipse-temurin:21-jdk-jammy AS build
-RUN mvn clean install
+RUN ./mvnw clean install
 ENV HOME=/usr/app
 RUN mkdir -p $HOME
 WORKDIR $HOME
