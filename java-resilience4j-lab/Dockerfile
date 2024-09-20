@@ -6,6 +6,9 @@ ENV HOME=/usr/app
 RUN mkdir -p $HOME
 WORKDIR $HOME
 ADD . $HOME
+
+RUN apt-get update && apt-get install dos2unix
+RUN dos2unix ./mvnw
 RUN ./mvnw -f $HOME/pom.xml clean package
 
 #
