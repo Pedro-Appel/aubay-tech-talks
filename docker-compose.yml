@@ -5,10 +5,7 @@ networks:
 services:
 
   app:
-    build:
-      context: ./java-resilience4j-lab/
-      dockerfile: Dockerfile
-    image: app
+    image: <<DOCKER_USER>>/lab-java4j:<<IMAGE_TAG>>
     container_name: app
     restart: unless-stopped
     networks:
