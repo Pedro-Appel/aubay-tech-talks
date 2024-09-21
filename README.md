@@ -10,7 +10,9 @@ This lab is divided into three sections:
 2. **GitHub Workflow**
 3. **Prometheus Observability**
 
-You should complete these sections in the order presented. Each section builds on the concepts learned in the previous one, providing a comprehensive understanding of resilience and observability in software development.
+To get the full experience you should complete these sections in the order presented. Each section builds on the concepts learned in the previous one, providing a comprehensive understanding of resilience and observability in software development.
+
+To start you should fork the repository on the lab-java branch. 
 
 ## 1. Java Resilience4j
 
@@ -22,7 +24,7 @@ In this section, you’ll work with an existing Java application that demonstrat
 - Implement Circuit Breaker, Rate Limiter, Time limiter, and Retry patterns.
 - Test the resilience features and understand their impact on application stability.
 
-1. CD to directory java-resilisence4j-lab
+1. CD to directory java-resilience4j-lab
 2. Complete the readme inside that dir 
 3. Push the changes to your master branch
 
