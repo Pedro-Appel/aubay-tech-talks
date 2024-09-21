@@ -10,7 +10,9 @@ This lab is divided into three sections:
 2. **GitHub Workflow**
 3. **Prometheus Observability**
 
-You should complete these sections in the order presented. Each section builds on the concepts learned in the previous one, providing a comprehensive understanding of resilience and observability in software development.
+To get the full experience you should complete these sections in the order presented. Each section builds on the concepts learned in the previous one, providing a comprehensive understanding of resilience and observability in software development.
+
+To start you should fork the repository on the lab-java branch.
 
 ## 1. Java Resilience4j
 
@@ -23,12 +25,12 @@ In this section, you’ll work with an existing Java application that demonstrat
 - Test the resilience features and understand their impact on application stability.
 
 1. CD to directory java-resilience4j-lab
-2. Complete the readme inside that dir 
+2. Complete the readme inside that dir
 3. Push the changes to your master branch
 
 ## 2. GitHub Workflow
 
-The second part of this lab focuses on Continuous Integration/Continuous Deployment (CI/CD) using GitHub Actions. 
+The second part of this lab focuses on Continuous Integration/Continuous Deployment (CI/CD) using GitHub Actions.
 Here, you will learn key concepts like the build, test, and deployment processes of your Java application.
 And implement the trigger for the action and also configure your repository to publish to your docker-hub
 
@@ -40,19 +42,19 @@ And implement the trigger for the action and also configure your repository to p
 - Understand a GitHub Actions workflow.
 - Integrate the Java App with a CI/CD pipeline and then publish the image to dockerhub
 
-### Step-by-Step 
+### Step-by-Step
 1. Go to the workflow directory (root/.github/workflows)
 2. Edit the ci-cd.yml with the trigger described bellow
 3. On you github repository go to " Settings > Secrets and Variables > Actions "
 4. Add 2 new secrets on the "Repository secrets" DOCKERHUB_TOKEN & DOCKERHUB_USERNAME
-   5. You can get this 2 secrets from you docker hub "Personal Access Tokens" [page](https://app.docker.com/settings/personal-access-tokens)
+    5. You can get this 2 secrets from you docker hub "Personal Access Tokens" [page](https://app.docker.com/settings/personal-access-tokens)
 6. Push the updated ci-cd.yml and what it run in the Actions page of you repository
 7. After the workflow is completed you can test modifying the docker-compose in the root of the project with the path of the created image
-   8. In the docker-compose.yml **line 8** where it says **"<<DOCKER_USER>>/lab-java4j:<<IMAGE_TAG>>"** replace with your newly created repository
-      9. You can find it going to the https://hub.docker.com/ login in > clicking on your picture (top-right corner) > My profile and under the repositories tap should be a "<your_username>/lab-java4j"
-      10. inside the imaqe you can get the latest tag by going in the "Tags" tab and copying the version image tag.
+    8. In the docker-compose.yml **line 8** where it says **"<<DOCKER_USER>>/lab-java4j:<<IMAGE_TAG>>"** replace with your newly created repository
+        9. You can find it going to the https://hub.docker.com/ login in > clicking on your picture (top-right corner) > My profile and under the repositories tap should be a "<your_username>/lab-java4j"
+        10. inside the imaqe you can get the latest tag by going in the "Tags" tab and copying the version image tag.
 ---
-Trigger 
+Trigger
 ```yaml
 on:
   push:
@@ -63,13 +65,18 @@ After mastering the GitHub workflow, you'll be ready to implement observability 
 
 ## 3. Prometheus Observability
 
-In the final section, you'll integrate Prometheus for observability, which is crucial for monitoring the health and performance of your application. Observability allows you to understand the internal state of your application based on the data it generates, which is vital for maintaining resilient and reliable services.
+In the final section, you'll integrate Prometheus for observability, which is crucial for monitoring the health and performance of your application.
+Observability allows you to understand the internal state of your application based on the data it generates, which is vital for maintaining resilient and reliable services.
 
 **Key Objectives:**
 
 - Integrate Prometheus with the Java application.
 - Set up metrics collection to monitor application performance.
 - Visualize the data in Grafana to gain insights into the application's behavior.
+
+### Step-by-Step
+1. Go to the grafana directory (root/grafana/)
+2. Follow the readme present in that directory
 
 ## Conclusion
 
