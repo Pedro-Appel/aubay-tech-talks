@@ -22,7 +22,9 @@ In this section, you’ll work with an existing Java application that demonstrat
 - Implement Circuit Breaker, Rate Limiter, Time limiter, and Retry patterns.
 - Test the resilience features and understand their impact on application stability.
 
-Once you complete the hands-on exercises in this section, you can move on to the next topic, where you'll automate the deployment and testing of this resilient application using GitHub workflows.
+1. CD to directory java-resilisence4j-lab
+2. Complete the readme inside that dir 
+3. Push the changes to your master branch
 
 ## 2. GitHub Workflow
 

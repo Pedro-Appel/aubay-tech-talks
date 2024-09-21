@@ -2,7 +2,7 @@ name: Build and Publish Workflow
 
 on:
   push:
-    branches: [develop, master]
+    branches: [master]
 
 jobs:
   java-build:

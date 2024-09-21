@@ -3,7 +3,7 @@
 Welcome to the TechTalk hands-on lab! In this session,
 we’ll be enhancing an existing Java application with resilience patterns using the Resilience4j library.
 Resilience4j is a lightweight fault tolerance library.
-We will cover the implementation of various resilience patterns including Circuit Breaker, Rate Limiter, Timelimiter,
+We will cover the implementation of various resilience patterns including Circuit Breaker, Rate Limiter, Time limiter,
 and Retry.
 
 ## Prerequisites
@@ -11,7 +11,6 @@ and Retry.
 - Java Development Kit (JDK) 17 or higher
 - Maven (for dependency management)
 - An IDE (e.g., IntelliJ IDEA, Eclipse, VSCode)
-- The Java application code (provided)
 
 ## Objectives
 
@@ -23,18 +22,11 @@ and Retry.
 
 ## Setup
 
-1. **Clone the Repository**
-
-   ```bash
-   git clone git@github.com:Pedro-Appel/aubay-tech-talks.git
-   cd java-resilience4j-lab
-   ```
-
-2. **Import the Project**
+1. **Import the Project**
 
    Open the project in your preferred IDE.
 
-3. **Add Dependencies**
+2. **Add Dependencies**
 
    Add the following dependencies to your `pom.xml`:
 
@@ -47,25 +39,38 @@ and Retry.
    ```
 ## Circuit Breaker
 
-1. **Annotate the desired class with the @CircuitBreaker annotation**
+1. **Annotate the listingExampleMethod in the ResilienceExampleController class with the @CircuitBreaker annotation**
 
    On your Controller:
 
    ```java
+   /*
+   * Other /imports
+   */
    import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-   
+
+   @Log4j2
    @RestController
    @RequestMapping("/api/v1/resilience")
-   public class Controller {
+   public class ResilienceExampleController {
 
-       @CircuitBreaker(name = "backend")
-       public static Object resilientEndpoint() {
-            service.foo();
-       }
+      /*
+      * Other methods
+      */
+      @GetMapping
+      @CircuitBreaker(name = "backend")
+      public CompletableFuture<String> listingExampleMethod(@RequestParam(name = "delay") boolean delay) {
+        log.info("Simulating list...");
+        log.info("Delay {}", delay);
+        return CompletableFuture.supplyAsync(() -> {
+            // Simulate long-running task
+            return resilienceExampleService.performOperationWithResilience(delay);
+        });
+      }
    }
    ```
 
-2. **Configure your circuit break**
+2. **Configure your circuit break on your application.yml (src/main/resources)**
 
    ```YML
    resilience4j.circuitbreaker:
@@ -84,25 +89,34 @@ and Retry.
 
 ## Rate Limiter
 
-1. **Annotate the desired class with the @RateLimiter annotation**
+1. **Annotate the writingExampleMethod in the ResilienceExampleController class with the @RateLimiter annotation**
 
    On your Controller:
 
    ```java
-      import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
-      
-      @RestController
-      @RequestMapping("/api/v1/resilience")
-      public class Controller {
+   /*
+   * Other /imports
+   */
+   import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
-        @RateLimiter(name = "backend")
-        public static Object resilientEndpoint() {
-            service.foo();
-        }
-    }
+   @Log4j2
+   @RestController
+   @RequestMapping("/api/v1/resilience")
+   public class ResilienceExampleController {
+
+      /*
+      * Other methods
+      */
+       @PostMapping
+       @RateLimiter(name = "backend")
+       public String writingExampleMethod() {
+           log.info("Simulating post...");
+           return resilienceExampleService.performOperationWithResilience();
+       }
+   }
    ```
 
-2. **Configure your RateLimiter**
+2. **Configure your RateLimiter on your application.yml (src/main/resources)**
 
 
 
@@ -120,25 +134,34 @@ and Retry.
 
 ## Retry
 
-1. **Annotate the desired class with the @Retry annotation**
+1. **Annotate the updatingExampleMethod in the ResilienceExampleController class with the @Retry annotation**
 
    On your Controller:
 
    ```java
-   import io.github.resilience4j.retry.annotation.Retry;
-   
+   /*
+   * Other /imports
+   */
+   import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
+   @Log4j2
    @RestController
    @RequestMapping("/api/v1/resilience")
-   public class Controller {
+   public class ResilienceExampleController {
 
-       @Retry(name = "backend")
-       public static Object resilientEndpoint() {
-            service.foo();
-       }
+      /*
+      * Other methods
+      */
+      @PutMapping
+      @Retry(name = "backend")
+      public String updatingExampleMethod() {
+        log.info("Simulating update...");
+        return resilienceExampleService.performOperationWithResilience();
+      }
    }
    ```
 
-2. **Configure your retry**
+2. **Configure your retry on your application.yml (src/main/resources)**
 
    ```YML
    resilience4j.retry:
@@ -153,25 +176,39 @@ and Retry.
    ```
 ## TimeLimiter
 
-1. **Annotate the desired class with the @TimeLimiter annotation**
+1. **Annotate the listingExampleMethod in the ResilienceExampleController class with the @TimeLimiter annotation**
 
    On your Controller:
 
    ```java
-   import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
-   
+   /*
+   * Other /imports
+   */
+   import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
+   @Log4j2
    @RestController
    @RequestMapping("/api/v1/resilience")
-   public class Controller {
+   public class ResilienceExampleController {
 
+   /*
+   * Other methods
+   */
+   
+       @GetMapping
        @TimeLimiter(name = "backend")
-       public static Object resilientEndpoint() {
-            service.foo();
+       public CompletableFuture<String> listingExampleMethod(@RequestParam(name = "delay") boolean delay) {
+           log.info("Simulating list...");
+           log.info("Delay {}", delay);
+           return CompletableFuture.supplyAsync(() -> {
+               // Simulate long-running task
+               return resilienceExampleService.performOperationWithResilience(delay);
+           });
        }
    }
    ```
 
-2. **Configure your time limiter**
+2. **Configure your time limiter on your application.yml (src/main/resources)**
 
    ```YML
    resilience4j.timelimiter:
@@ -248,19 +285,19 @@ and Retry.
    mvn clean install
    ```
 
-2. **Run the Application**
-
-   Run the application from your IDE or using the command line.
-
+2. **Run and test the Application**
+   
    ```bash
-   mvn spring-boot:run
+   docker build . -t server_img \
+     && docker run  -p 8080:8080 --name app server_img
    ```
-
+   And in another terminal
+   ```bash
+   ../client/client.sh
+   ```
 
 ## Conclusion
 
 Congratulations on completing the hands-on lab! You have successfully integrated Circuit Breaker, Rate Limiter, Retry, Time Limiter patterns into your Java application using Resilience4j. These patterns will help in improving the robustness and reliability of your application.
-
 Feel free to experiment with the configurations and try different scenarios to see how each resilience pattern behaves under various conditions.
-
 For more details and advanced configurations, refer to the [Resilience4j documentation](https://resilience4j.readme.io/).

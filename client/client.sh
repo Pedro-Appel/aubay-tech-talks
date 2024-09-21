@@ -1,7 +1,13 @@
 #!/bin/bash
 
 # Base URL for the API endpoints
-HOST='app:8080'
+HOST=$APP_SERVER
+echo "$HOST"
+if [[ $APP_SERVER == "" ]]; then
+  HOST="http://localhost:8080"
+fi
+echo "$HOST"
+
 ENDPOINT='/api/v1/resilience'
 # Function to perform 30 simultaneous POST requests
 function call_post_simultaneous() {
@@ -43,6 +49,8 @@ function call_put_with_varying_payloads() {
         --request PUT "${HOST}${ENDPOINT}")
     echo "PUT request completed with status: $STATUS"
 }
+
+sleep 10
 
 while true
 do

@@ -1,15 +1,10 @@
 FROM debian
 
+ARG APP_SERVER
+ENV APP_SERVER $APP_SERVER
 USER root
 
 COPY ./client.sh /scripts/client.sh
-
-RUN apt-get update && apt-get install dos2unix
-RUN dos2unix /scripts/client.sh
-
-
-RUN sleep 10
-
 
 RUN apt update && \
         apt install curl -y && \
