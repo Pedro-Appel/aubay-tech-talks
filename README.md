@@ -10,7 +10,9 @@ This lab is divided into three sections:
 2. **GitHub Workflow**
 3. **Prometheus Observability**
 
-You should complete these sections in the order presented. Each section builds on the concepts learned in the previous one, providing a comprehensive understanding of resilience and observability in software development.
+To get the full experience you should complete these sections in the order presented. Each section builds on the concepts learned in the previous one, providing a comprehensive understanding of resilience and observability in software development.
+
+To start you should fork the repository on the lab-java branch.
 
 ## 1. Java Resilience4j
 
@@ -63,13 +65,18 @@ After mastering the GitHub workflow, you'll be ready to implement observability 
 
 ## 3. Prometheus Observability
 
-In the final section, you'll integrate Prometheus for observability, which is crucial for monitoring the health and performance of your application. Observability allows you to understand the internal state of your application based on the data it generates, which is vital for maintaining resilient and reliable services.
+In the final section, you'll integrate Prometheus for observability, which is crucial for monitoring the health and performance of your application.
+Observability allows you to understand the internal state of your application based on the data it generates, which is vital for maintaining resilient and reliable services.
 
 **Key Objectives:**
 
 - Integrate Prometheus with the Java application.
 - Set up metrics collection to monitor application performance.
 - Visualize the data in Grafana to gain insights into the application's behavior.
+
+### Step-by-Step
+1. Go to the grafana directory (root/grafana/)
+2. Follow the readme present in that directory
 
 ## Conclusion
 
