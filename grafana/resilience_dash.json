@@ -1371,5 +1371,5 @@
     "timezone": "browser",
     "title": "Observability - Resilience4j Circuit Breaker",
     "version": 53,
-    "uid": "adv-dash"
+    "uid": "resilience-dash"
   }
