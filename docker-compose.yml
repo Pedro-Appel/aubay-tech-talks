@@ -1,0 +1,70 @@
+networks:
+  local:
+    driver: bridge
+
+services:
+
+  app:
+    image: <<DOCKER_USER>>/lab-java4j:<<IMAGE_TAG>>
+    container_name: app
+    restart: unless-stopped
+    networks:
+      - local
+    healthcheck:
+      test: "curl -sS http://app:8080/actuator/health"
+      interval: 1s
+      timeout: 30s
+      retries: 60
+    ports:
+      - "8080:8080"
+    ulimits:
+      nofile:
+        soft: 1048576
+        hard: 1048576
+  
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    ports:
+      - "9090:9090"
+    networks:
+      - local
+    user: root
+
+  client:
+    depends_on:
+      - app
+    build:
+      args:
+        - APP_SERVER=app:8080
+      context: ./client/
+      dockerfile: Dockerfile
+    image: client
+    container_name: client
+    restart: unless-stopped
+    networks:
+      - local
+  
+  grafana:
+    build:
+      context: ./grafana/
+      dockerfile: Dockerfile
+    depends_on:
+      - prometheus
+      - client
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    networks:
+      - local

@@ -1,0 +1,69 @@
+resilience4j.circuitbreaker:
+  instances:
+    backend:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 10
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      slidingWindowType: COUNT_BASED
+      minimumNumberOfCalls: 5
+      waitDurationInOpenState: 3s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+
+resilience4j.retry:
+  instances:
+    backend:
+      maxAttempts: 1
+      waitDuration: 500ms
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+
+resilience4j.ratelimiter:
+  instances:
+    backend:
+      limitForPeriod: 20
+      limitRefreshPeriod: 1s
+      timeoutDuration: 0s
+      registerHealthIndicator: true
+      subscribe-for-events: true
+
+resilience4j.timelimiter:
+  instances:
+    backend:
+      timeoutDuration: 5s
+      cancelRunningFuture: true
+
+management.metrics:
+  enable.jvm: true
+  export.prometheus.enabled: true
+  distribution.sla.http.server.requests: 50ms,100ms,200ms,300ms,500ms,1s
+  tags.application: @project.name@
+  distribution.percentiles-histogram:
+    http.server.requests: true
+    resilience4j.circuitbreaker.calls: true
+    resilience4j.ratelimiter.calls: true
+
+management.endpoints:
+  web.exposure.include: '*'
+  health.show-details: always
+
+management.endpoint.health.show-details: always
+
+management.health:
+  diskspace.enabled: true
+  circuitbreakers.enabled: true
+  ratelimiters.enabled: true
+
+info.app:
+  name: @project.name@
+  description: @project.description@
+  version: @project.version@
+  encoding: @project.build.sourceEncoding@
+  java.version: @java.version@
+
+logging:
+  level:
+    io.github.resilience4j: DEBUG
