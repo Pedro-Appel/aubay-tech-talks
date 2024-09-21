@@ -22,7 +22,7 @@ In this section, you’ll work with an existing Java application that demonstrat
 - Implement Circuit Breaker, Rate Limiter, Time limiter, and Retry patterns.
 - Test the resilience features and understand their impact on application stability.
 
-1. CD to directory java-resilisence4j-lab
+1. CD to directory java-resilience4j-lab
 2. Complete the readme inside that dir 
 3. Push the changes to your master branch
 
