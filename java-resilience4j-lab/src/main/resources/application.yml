@@ -1,3 +1,5 @@
+spring.application.name: resilient-backend
+
 resilience4j.circuitbreaker:
   instances:
     backend:
@@ -67,3 +69,5 @@ info.app:
 logging:
   level:
     io.github.resilience4j: DEBUG
+
+eureka.client.service-url.defaultZone: http://${EUREKA_HOST}:8761/eureka/

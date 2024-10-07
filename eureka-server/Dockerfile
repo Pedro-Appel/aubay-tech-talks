@@ -12,6 +12,6 @@ RUN --mount=type=cache,target=/root/.m2 mvn clean package
 FROM eclipse-temurin:21-jre-jammy
 ARG JAR_FILE=/usr/app/target/*.jar
 COPY --from=build $JAR_FILE /app/app.jar
-EXPOSE 8080
+EXPOSE 8761
 
 ENTRYPOINT ["java","-jar","-Xms128M","-Xmx128M","/app/app.jar"]

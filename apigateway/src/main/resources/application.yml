@@ -1,0 +1,25 @@
+spring.application.name: api-gateway
+server.port: 8888
+
+management.endpoint.gateway.enabled: true # default value
+eureka.client:
+  service-url.defaultZone: http://${EUREKA_HOST}:8761/eureka/
+  fetch-registry: true
+  register-with-eureka: false
+
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: TRACE
+#    org.springframework.http.server.reactive: DEBUG
+#    org.springframework.web.reactive: DEBUG
+#    reactor.ipc.netty: DEBUG
+#    reactor.netty: DEBUG
+
+management.endpoints.web.exposure.include: '*'
+
+spring.cloud.gateway:
+  routes:
+    - id: backend
+      uri: lb://resilient-backend  # Your backend service
+      predicates:
+        - Path=/**

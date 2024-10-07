@@ -32,7 +32,7 @@ public class ResilienceExampleController {
     @TimeLimiter(name = "backend")
     @RateLimiter(name = "backend")
     @CircuitBreaker(name = "backend")
-    public CompletableFuture<String> listingExampleMethod(@RequestParam(name = "delay") boolean delay) {
+    public CompletableFuture<String> listingExampleMethod(@RequestParam(name = "delay", defaultValue = "true") boolean delay) {
         log.info("Simulating list...");
         log.info("Delay {}", delay);
         return CompletableFuture.supplyAsync(() -> {

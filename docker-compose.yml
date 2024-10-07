@@ -4,23 +4,71 @@ networks:
 
 services:
 
-  app:
-    image: <<DOCKER_USER>>/lab-java4j:<<IMAGE_TAG>>
-    container_name: app
+  eureka-server:
+    build:
+      context: ./eureka-server/
+      dockerfile: Dockerfile
+    container_name: eureka-server
+    restart: unless-stopped
+    ports:
+      - "8761:8761"
+    networks:
+      - local
+
+  api-gateway:
+    build:
+      context: ./apigateway/
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    depends_on:
+      - eureka-server
+    environment:
+      - EUREKA_HOST=eureka-server
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+    networks:
+      - local
+
+  app-east:
+    build:
+      context: ./java-resilience4j-lab/
+      dockerfile: Dockerfile
+#    image: pedroappel/lab-java4j:v1726954682
+    container_name: app-east
+    depends_on:
+      - eureka-server
+    environment:
+      - EUREKA_HOST=eureka-server
     restart: unless-stopped
     networks:
       - local
     healthcheck:
-      test: "curl -sS http://app:8080/actuator/health"
+      test: "curl -sS http://app-east:8080/actuator/health"
       interval: 1s
       timeout: 30s
       retries: 60
     ports:
       - "8080:8080"
-    ulimits:
-      nofile:
-        soft: 1048576
-        hard: 1048576
+
+  app-west:
+    build:
+      context: ./java-resilience4j-lab/
+      dockerfile: Dockerfile
+#    image: pedroappel/lab-java4j:v1726954682
+    container_name: app-west
+    environment:
+      - EUREKA_HOST=eureka-server
+    restart: unless-stopped
+    networks:
+      - local
+    healthcheck:
+      test: "curl -sS http://app-west:8080/actuator/health"
+      interval: 1s
+      timeout: 30s
+      retries: 60
+    ports:
+      - "8081:8080"
   
   prometheus:
     image: prom/prometheus:latest
@@ -43,10 +91,11 @@ services:
 
   client:
     depends_on:
-      - app
+      - app-west
+      - app-east
     build:
       args:
-        - APP_SERVER=app:8080
+        - APP_SERVER=api-gateway:8888
       context: ./client/
       dockerfile: Dockerfile
     image: client

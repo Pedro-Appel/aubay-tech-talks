@@ -4,7 +4,7 @@
 HOST=$APP_SERVER
 echo "$HOST"
 if [[ $APP_SERVER == "" ]]; then
-  HOST="http://localhost:8080"
+  HOST="http://localhost:8888"
 fi
 echo "$HOST"
 
