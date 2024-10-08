@@ -7,13 +7,7 @@ eureka.client:
   fetch-registry: true
   register-with-eureka: false
 
-#logging:
-#  level:
-#    org.springframework.cloud.gateway: TRACE
-#    org.springframework.http.server.reactive: DEBUG
-#    org.springframework.web.reactive: DEBUG
-#    reactor.ipc.netty: DEBUG
-#    reactor.netty: DEBUG
+logging.level.root: ${LOG_LEVEL}
 
 management.endpoints.web.exposure.include: '*'
 

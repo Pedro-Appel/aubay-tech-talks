@@ -66,8 +66,6 @@ info.app:
   encoding: @project.build.sourceEncoding@
   java.version: @java.version@
 
-logging:
-  level:
-    io.github.resilience4j: DEBUG
+logging.level.root: ${LOG_LEVEL}
 
 eureka.client.service-url.defaultZone: http://${EUREKA_HOST}:8761/eureka/

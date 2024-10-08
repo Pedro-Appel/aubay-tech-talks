@@ -9,6 +9,8 @@ services:
       context: ./eureka-server/
       dockerfile: Dockerfile
     container_name: eureka-server
+    environment:
+      - LOG_LEVEL=ERROR
     restart: unless-stopped
     ports:
       - "8761:8761"
@@ -24,6 +26,7 @@ services:
       - eureka-server
     environment:
       - EUREKA_HOST=eureka-server
+      - LOG_LEVEL=ERROR
     restart: unless-stopped
     ports:
       - "8888:8888"
@@ -40,6 +43,7 @@ services:
       - eureka-server
     environment:
       - EUREKA_HOST=eureka-server
+      - LOG_LEVEL=ERROR
     restart: unless-stopped
     networks:
       - local
@@ -59,6 +63,7 @@ services:
     container_name: app-west
     environment:
       - EUREKA_HOST=eureka-server
+      - LOG_LEVEL=ERROR
     restart: unless-stopped
     networks:
       - local
