@@ -50,7 +50,7 @@ function call_put_with_varying_payloads() {
     echo "PUT request completed with status: $STATUS"
 }
 
-sleep 10
+sleep 60
 
 while true
 do
